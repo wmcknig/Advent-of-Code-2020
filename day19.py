@@ -17,26 +17,6 @@ means that some rules can now match an infinite number of strings
 """
 
 """
-Tests a string to see if it satisfies a given rule
-"""
-def generate_strings(rules, rule):
-    #base case, rule is a string
-    if type(rule) is str:
-        return [rule]
-    #rule is at least one list of rules
-    generated = []
-    for subrule in rule:
-        generated_sub = [""]
-        for i in subrule:
-            suffixes = generate_strings(rules, rules[i])
-            temp = []
-            for prefix in generated_sub:
-                temp += [prefix + suffix for suffix in suffixes]
-            generated_sub = temp
-        generated += generated_sub
-    return generated
-
-"""
 Given a set of rules, an ordered list of rules for a string, and a string,
 attempts to decompose the string into rules by expanding the first term of
 the rule and progressively removing the prefix of the string
